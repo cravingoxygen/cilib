@@ -19,7 +19,7 @@ import net.sourceforge.cilib.type.types.container.Vector;
 
 /**
  * The <tt>VelocityProvider</tt> for the Bare Bones PSO as adapted by Kennedy.
- * J. Kennedy, “Bare bones particle swarms”, in Proceedings of the IEEE Swarm Intelligence Symposium, pp. 80-87, 2003.
+ * J. Kennedy, Bare bones particle swarms, in Proceedings of the IEEE Swarm Intelligence Symposium, pp. 80-87, 2003.
  */
 public class BareBonesVelocityProvider implements VelocityProvider {
 
@@ -54,6 +54,7 @@ public class BareBonesVelocityProvider implements VelocityProvider {
 
     @Override
     public Vector get(Particle particle) {
+		System.out.println("Velocity provided based on exploit prob of "+this.exploitProbability.getParameter());
         Vector localGuide = (Vector) localGuideProvider.get(particle);
         Vector globalGuide = (Vector) globalGuideProvider.get(particle);
 
@@ -77,6 +78,7 @@ public class BareBonesVelocityProvider implements VelocityProvider {
 
     public void setExploitProbability(ControlParameter exploitProbability) {
         this.exploitProbability = exploitProbability;
+		System.out.println("Exploit probability has been set to: "+ this.exploitProbability.getParameter());
     }
 
     public ControlParameter getExploitProbability() {

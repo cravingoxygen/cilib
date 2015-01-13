@@ -116,7 +116,6 @@ public class XMLObjectFactory {
         try {
             return Class.forName("net.sourceforge.cilib." + className);
         } catch (ClassNotFoundException e) {
-            System.out.println("Class not found: net.sourceforge.cilib." + className);
             e.printStackTrace();
         }
 

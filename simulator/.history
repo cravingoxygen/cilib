@@ -1,0 +1,4 @@
+exit
+sbt compile
+compile
+exit
