@@ -1,0 +1,644 @@
+<?xml version="1.0"?>
+<!DOCTYPE simulator [
+<!ATTLIST algorithm id ID #IMPLIED>
+<!ATTLIST problem id ID #IMPLIED>
+<!ATTLIST measurements id ID #IMPLIED>
+]>
+<simulator>
+    <algorithms>
+        <algorithm id="ortho-pso-i5" class="pso.PSO">
+			<initialisationStrategy class="algorithm.initialisation.ClonedPopulationInitialisationStrategy">
+                <entityNumber value="25"/>
+                <entityType class="pso.particle.StandardParticle">
+					<positionInitialisationStrategy class="entity.initialisation.OrthogonalInitialisationStrategy">
+						<numBasisVectors value="1"/>
+					</positionInitialisationStrategy>
+                </entityType>
+            </initialisationStrategy>
+            <addStoppingCondition class="stoppingcondition.MeasuredStoppingCondition" target="5000"/>
+        </algorithm>
+        <algorithm id="ortho-pso-i25" class="pso.PSO">
+			<initialisationStrategy class="algorithm.initialisation.ClonedPopulationInitialisationStrategy">
+                <entityNumber value="25"/>
+                <entityType class="pso.particle.StandardParticle">
+					<positionInitialisationStrategy class="entity.initialisation.OrthogonalInitialisationStrategy">
+						<numBasisVectors value="1"/>
+					</positionInitialisationStrategy>
+                </entityType>
+            </initialisationStrategy>
+            <addStoppingCondition class="stoppingcondition.MeasuredStoppingCondition" target="5000"/>
+        </algorithm>
+    </algorithms>
+    <problems>
+        <problem id="absoluteValue" class="problem.FunctionOptimisationProblem" domain="R(-100:100)^50">
+            <function class="functions.continuous.unconstrained.AbsoluteValue"/>
+        </problem>
+        <problem id="eggHolder" class="problem.FunctionOptimisationProblem" domain="R(-512:512)^50">
+            <function class="functions.continuous.unconstrained.EggHolder"/>
+        </problem>
+        <problem id="elliptic" class="problem.FunctionOptimisationProblem" domain="R(-100:100)^50">
+            <function class="functions.continuous.unconstrained.Elliptic"/>
+        </problem>
+        <problem id="ellipticSh" class="problem.FunctionOptimisationProblem" domain="R(-100:100)^50">
+            <function class="functions.continuous.decorators.ShiftedFunctionDecorator">
+                <function class="functions.continuous.unconstrained.Elliptic"/>
+                <verticalShift class="controlparameter.ConstantControlParameter" parameter="-450"/>
+                <horizontalShift class="controlparameter.ConstantControlParameter" parameter="10"/>
+            </function>
+        </problem>
+        <problem id="ellipticR" class="problem.FunctionOptimisationProblem" domain="R(-100:100)^50">
+                <function class="functions.continuous.decorators.RotatedFunctionDecorator">
+					<function class="functions.continuous.unconstrained.Elliptic"/>
+                    <matrixType value="orthonormal"/>
+                </function>
+        </problem>
+        <problem id="ellipticShR" class="problem.FunctionOptimisationProblem" domain="R(-100:100)^50">
+            <function class="functions.continuous.decorators.ShiftedFunctionDecorator">
+                <function class="functions.continuous.decorators.RotatedFunctionDecorator">
+					<function class="functions.continuous.unconstrained.Elliptic"/>
+                    <matrixType value="orthonormal"/>
+                </function>
+                <horizontalShift class="controlparameter.ConstantControlParameter" parameter="10"/>
+                <verticalShift class="controlparameter.ConstantControlParameter" parameter="-450"/>
+            </function>
+        </problem>
+        <problem id="griewank" class="problem.FunctionOptimisationProblem" domain="R(-600:600)^50">
+            <function class="functions.continuous.unconstrained.Griewank"/>
+        </problem>
+        <problem id="griewankSh" class="problem.FunctionOptimisationProblem" domain="R(-600:600)^50">
+            <function class="functions.continuous.decorators.ShiftedFunctionDecorator">
+				<function class="functions.continuous.unconstrained.Griewank"/>
+                <verticalShift class="controlparameter.ConstantControlParameter" parameter="-180"/>
+                <horizontalShift class="controlparameter.ConstantControlParameter" parameter="10"/>
+            </function>
+        </problem>
+        <problem id="griewankR" class="problem.FunctionOptimisationProblem" domain="R(-600:600)^50">
+                <function class="functions.continuous.decorators.RotatedFunctionDecorator">
+					<function class="functions.continuous.unconstrained.Griewank"/>
+                    <matrixType value="orthonormal"/>
+                </function>
+        </problem>
+        <problem id="griewankShR" class="problem.FunctionOptimisationProblem" domain="R(-600:600)^50">
+            <function class="functions.continuous.decorators.ShiftedFunctionDecorator">
+                <function class="functions.continuous.decorators.RotatedFunctionDecorator">
+					<function class="functions.continuous.unconstrained.Griewank"/>
+                    <matrixType value="orthonormal"/>
+                </function>
+                <verticalShift class="controlparameter.ConstantControlParameter" parameter="-180"/>
+                <horizontalShift class="controlparameter.ConstantControlParameter" parameter="10"/>
+            </function>
+        </problem>
+        <problem id="hyperEllipsoid" class="problem.FunctionOptimisationProblem" domain="R(-5.12:5.12)^50">
+            <function class="functions.continuous.unconstrained.HyperEllipsoid"/>
+        </problem>
+        <problem id="michalewicz" class="problem.FunctionOptimisationProblem" domain="R(0:3.141592653589793)^50">
+            <function class="functions.continuous.unconstrained.Michalewicz"/>
+        </problem>
+        <problem id="norwegian" class="problem.FunctionOptimisationProblem" domain="R(-1.1:1.1)^50">
+            <function class="functions.continuous.unconstrained.Norwegian"/>
+        </problem>
+        <problem id="quadric" class="problem.FunctionOptimisationProblem" domain="R(-100:100)^50">
+            <function class="functions.continuous.unconstrained.Quadric"/>
+        </problem>
+        <problem id="quartic" class="problem.FunctionOptimisationProblem" domain="R(-1.28:1.28)^50">
+            <function class="functions.continuous.unconstrained.Quartic"/>
+        </problem>
+        <problem id="rastrigin" class="problem.FunctionOptimisationProblem" domain="R(-5.12:5.12)^50">
+            <function class="functions.continuous.unconstrained.Rastrigin"/>
+        </problem>
+        <problem id="rastriginSh" class="problem.FunctionOptimisationProblem" domain="R(-5.12:5.12)^50">
+            <function class="functions.continuous.decorators.ShiftedFunctionDecorator">
+				<function class="functions.continuous.unconstrained.Rastrigin"/>
+                <verticalShift class="controlparameter.ConstantControlParameter" parameter="-330"/>
+                <horizontalShift class="controlparameter.ConstantControlParameter" parameter="2"/>
+            </function>
+        </problem>
+        <problem id="rastriginR" class="problem.FunctionOptimisationProblem" domain="R(-5.12:5.12)^50">
+                <function class="functions.continuous.decorators.RotatedFunctionDecorator">
+					<function class="functions.continuous.unconstrained.Rastrigin"/>
+                    <matrixType value="orthonormal"/>
+                </function>
+        </problem>
+        <problem id="rastriginShR" class="problem.FunctionOptimisationProblem" domain="R(-5.12:5.12)^50">
+            <function class="functions.continuous.decorators.ShiftedFunctionDecorator">
+                <function class="functions.continuous.decorators.RotatedFunctionDecorator">
+					<function class="functions.continuous.unconstrained.Rastrigin"/>
+                    <matrixType value="orthonormal"/>
+                </function>
+                <verticalShift class="controlparameter.ConstantControlParameter" parameter="-330"/>
+                <horizontalShift class="controlparameter.ConstantControlParameter" parameter="2"/>
+            </function>
+        </problem>
+        <problem id="rosenbrock" class="problem.FunctionOptimisationProblem" domain="R(-30:30)^50">
+            <function class="functions.continuous.unconstrained.Rosenbrock"/>
+        </problem>
+        <problem id="rosenbrockSh" class="problem.FunctionOptimisationProblem" domain="R(-30:30)^50">
+            <function class="functions.continuous.decorators.ShiftedFunctionDecorator">
+				<function class="functions.continuous.unconstrained.Rosenbrock"/>
+                <verticalShift class="controlparameter.ConstantControlParameter" parameter="-390"/>
+                <horizontalShift class="controlparameter.ConstantControlParameter" parameter="10"/>
+            </function>
+        </problem>
+        <problem id="rosenbrockR" class="problem.FunctionOptimisationProblem" domain="R(-30:30)^50">
+                <function class="functions.continuous.decorators.RotatedFunctionDecorator">
+					<function class="functions.continuous.unconstrained.Rosenbrock"/>
+                    <matrixType value="orthonormal"/>
+                </function>
+        </problem>
+        <problem id="salomon" class="problem.FunctionOptimisationProblem" domain="R(-100:100)^50">
+            <function class="functions.continuous.unconstrained.Salomon"/>
+        </problem>
+        <problem id="schaffer6" class="problem.FunctionOptimisationProblem" domain="R(-100:100)^50">
+            <function class="functions.continuous.unconstrained.Schaffer6"/>
+        </problem>
+        <problem id="schaffer6ShR" class="problem.FunctionOptimisationProblem" domain="R(-100:100)^50">
+            <function class="functions.continuous.decorators.ShiftedFunctionDecorator">
+                <function class="functions.continuous.decorators.RotatedFunctionDecorator">
+					<function class="functions.continuous.unconstrained.Schaffer6"/>
+                    <matrixType value="orthonormal"/>
+                </function>
+                <verticalShift class="controlparameter.ConstantControlParameter" parameter="-300"/>
+                <horizontalShift class="controlparameter.ConstantControlParameter" parameter="20"/>
+            </function>
+        </problem>
+        <problem id="schwefel1_2" class="problem.FunctionOptimisationProblem" domain="R(-100:100)^50">
+            <function class="functions.continuous.SchwefelProblem1_2"/>
+        </problem>
+        <problem id="schwefel1_2Sh" class="problem.FunctionOptimisationProblem" domain="R(-100:100)^50">
+            <function class="functions.continuous.decorators.ShiftedFunctionDecorator">
+				<function class="functions.continuous.SchwefelProblem1_2"/>
+                <verticalShift class="controlparameter.ConstantControlParameter" parameter="-450"/>
+                <horizontalShift class="controlparameter.ConstantControlParameter" parameter="10"/>
+            </function>
+        </problem>
+        <problem id="schwefel1_2R" class="problem.FunctionOptimisationProblem" domain="R(-100:100)^50">
+                <function class="functions.continuous.decorators.RotatedFunctionDecorator">
+					<function class="functions.continuous.SchwefelProblem1_2"/>
+                    <matrixType value="orthonormal"/>
+                </function>
+        </problem>
+        <problem id="schwefel2_21" class="problem.FunctionOptimisationProblem" domain="R(-100:100)^50">
+            <function class="functions.continuous.unconstrained.SchwefelProblem2_21"/>
+        </problem>
+        <problem id="spherical" class="problem.FunctionOptimisationProblem" domain="R(-5.12:5.12)^50">
+            <function class="functions.continuous.unconstrained.Spherical"/>
+        </problem>
+        <problem id="sphericalSh" class="problem.FunctionOptimisationProblem" domain="R(-5.12:5.12)^50">
+            <function class="functions.continuous.decorators.ShiftedFunctionDecorator">
+				<function class="functions.continuous.unconstrained.Spherical"/>
+                <verticalShift class="controlparameter.ConstantControlParameter" parameter="-450"/>
+                <horizontalShift class="controlparameter.ConstantControlParameter" parameter="10"/>
+            </function>
+        </problem>
+        <problem id="step" class="problem.FunctionOptimisationProblem" domain="R(-100:100)^50">
+            <function class="functions.continuous.unconstrained.Step"/>
+        </problem>
+        <problem id="vincent" class="problem.FunctionOptimisationProblem" domain="R(0.25:10)^50">
+            <function class="functions.continuous.unconstrained.Vincent"/>
+        </problem>
+        <problem id="weierstrass" class="problem.FunctionOptimisationProblem" domain="R(-0.5:0.5)^50">
+            <function class="functions.continuous.unconstrained.Weierstrass"/>
+        </problem>
+        <problem id="weierstrassSh" class="problem.FunctionOptimisationProblem" domain="R(-0.5:0.5)^50">
+            <function class="functions.continuous.decorators.ShiftedFunctionDecorator">
+				<function class="functions.continuous.unconstrained.Weierstrass"/>
+                <verticalShift class="controlparameter.ConstantControlParameter" parameter="-130"/>
+                <horizontalShift class="controlparameter.ConstantControlParameter" parameter="1"/>
+            </function>
+        </problem>
+        <problem id="schwefel" class="problem.FunctionOptimisationProblem" domain="R(-100:100)^50">
+            <function class="functions.continuous.unconstrained.Schwefel"/>
+        </problem>
+        <problem id="dixonPrice" class="problem.FunctionOptimisationProblem" domain="R(-10:10)^50">
+            <function class="functions.continuous.unconstrained.DixonPrice"/>
+        </problem>
+        <problem id="powellSingular" class="problem.FunctionOptimisationProblem" domain="R(-4:5)^50">
+            <function class="functions.continuous.unconstrained.PowellSingular"/>
+        </problem>
+    </problems>
+    <measurements id="fitness" class="simulator.MeasurementSuite" resolution="10">
+        <addMeasurement class="measurement.single.Fitness"/>
+    </measurements>
+    <simulations>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="ellipticSh"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/EllipticSh/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="ellipticR"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/EllipticR/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="ellipticShR"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/EllipticShR/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="griewank"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Griewank/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="griewankSh"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/GriewankSh/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="griewankR"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/GriewankR/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="griewankShR"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/GriewankShR/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="hyperEllipsoid"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/HyperEllipsoid/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="michalewicz"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Michalewicz/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="norwegian"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Norwegian/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="quadric"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Quadric/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="quartic"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Quartic/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="rastrigin"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Rastrigin/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="rastriginSh"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/RastriginSh/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="rastriginR"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/RastriginR/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="rastriginShR"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/RastriginShR/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="rosenbrock"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Rosenbrock/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="rosenbrockSh"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/RosenbrockSh/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="rosenbrockR"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/RosenbrockR/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="salomon"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Salomon/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="schaffer6"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Schaffer6/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="schaffer6ShR"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Schaffer6ShR/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="schwefel1_2"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Schwefel1_2/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="schwefel1_2Sh"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Schwefel1_2Sh/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="schwefel1_2R"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Schwefel1_2R/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="schwefel2_21"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Schwefel2_21/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="spherical"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Spherical/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="sphericalSh"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/SphericalSh/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="step"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Step/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="vincent"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Vincent/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="weierstrass"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Weierstrass/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="weierstrassSh"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/WeierstrassSh/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="schwefel"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Schwefel/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="dixonPrice"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/DixonPrice/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i25"/>
+            <problem idref="powellSingular"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/PowellSingular/ortho-pso-n50-s25-i25.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="ellipticSh"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/EllipticSh/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="ellipticR"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/EllipticR/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="ellipticShR"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/EllipticShR/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="griewank"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Griewank/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="griewankSh"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/GriewankSh/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="griewankR"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/GriewankR/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="griewankShR"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/GriewankShR/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="hyperEllipsoid"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/HyperEllipsoid/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="michalewicz"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Michalewicz/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="norwegian"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Norwegian/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="quadric"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Quadric/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="quartic"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Quartic/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="rastrigin"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Rastrigin/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="rastriginSh"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/RastriginSh/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="rastriginR"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/RastriginR/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="rastriginShR"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/RastriginShR/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="rosenbrock"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Rosenbrock/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="rosenbrockSh"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/RosenbrockSh/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="rosenbrockR"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/RosenbrockR/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="salomon"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Salomon/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="schaffer6"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Schaffer6/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="schaffer6ShR"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Schaffer6ShR/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="schwefel1_2"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Schwefel1_2/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="schwefel1_2Sh"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Schwefel1_2Sh/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="schwefel1_2R"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Schwefel1_2R/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="schwefel2_21"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Schwefel2_21/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="spherical"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Spherical/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="sphericalSh"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/SphericalSh/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="step"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Step/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="vincent"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Vincent/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="weierstrass"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Weierstrass/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="weierstrassSh"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/WeierstrassSh/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="schwefel"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/Schwefel/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="dixonPrice"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/DixonPrice/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+        <simulation samples="50">
+            <algorithm idref="ortho-pso-i5"/>
+            <problem idref="powellSingular"/>
+            <measurements idref="fitness" />
+	    <output format="CSV" file="data/PowellSingular/ortho-pso-n50-s25-i5.csv" />
+        </simulation>
+    </simulations>
+</simulator>
